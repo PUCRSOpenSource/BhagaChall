@@ -1,6 +1,7 @@
 package Server;
 
 import Shared.GameInterface;
+import Shared.MatchStatus;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -17,6 +18,11 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     @Override
     public UUID register(String name) throws RemoteException {
         return lobby.register(name);
+    }
+
+    @Override
+    public MatchStatus hasMatch(UUID userID) throws RemoteException {
+        return lobby.hasMatch(userID);
     }
 }
 

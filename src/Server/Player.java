@@ -11,8 +11,12 @@ public class Player {
         this.id = id;
     }
 
+    public boolean check(UUID id) {
+        return this.id.equals(id);
+    }
+
     @Override
     public String toString() {
-        return "Name: " + name + "\n" + "ID: " + id + "\n";
+        return "Name: " + name + ", ID: " + id + "\n";
     }
 }
