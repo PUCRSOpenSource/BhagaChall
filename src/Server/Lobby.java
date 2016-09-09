@@ -39,4 +39,24 @@ public class Lobby {
         }
         return MatchStatus.NOT_FOUND;
     }
+
+    public boolean isTurn(UUID userID) {
+        Match match = findMatch(userID);
+        return match != null && match.isTurn(userID);
+    }
+
+    private Match findMatch(UUID userID) {
+        for (Match match: matches) {
+            if (match.hasPlayer(userID)) {
+                return match;
+            }
+        }
+        return null;
+    }
+
+    public void makePlay(UUID userID) {
+        Match match = findMatch(userID);
+        assert match != null;
+        match.play();
+    }
 }

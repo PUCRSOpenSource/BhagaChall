@@ -24,5 +24,15 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     public MatchStatus hasMatch(UUID userID) throws RemoteException {
         return lobby.hasMatch(userID);
     }
+
+    @Override
+    public boolean isMyTurn(UUID userID) throws RemoteException {
+        return lobby.isTurn(userID);
+    }
+
+    @Override
+    public void makePlay(UUID userID) throws RemoteException {
+        lobby.makePlay(userID);
+    }
 }
 

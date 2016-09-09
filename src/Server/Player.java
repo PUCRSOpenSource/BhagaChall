@@ -15,6 +15,10 @@ public class Player {
         return this.id.equals(id);
     }
 
+    public void play() {
+        System.out.println("Player " + name + " played!!");
+    }
+
     @Override
     public String toString() {
         return "Name: " + name + ", ID: " + id + "\n";

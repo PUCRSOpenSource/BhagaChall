@@ -7,6 +7,7 @@ import java.util.UUID;
 public class Match {
     Player tiger;
     Player goat;
+    Player currentPlayer;
 
     public boolean isOpen() {
         return tiger == null || goat == null;
@@ -27,6 +28,27 @@ public class Match {
             goat = player;
         } else {
             tiger = player;
+            currentPlayer = tiger;
         }
+    }
+
+    public boolean hasPlayer(UUID userID) {
+        return tiger.check(userID) || goat.check(userID);
+    }
+
+    public void play() {
+        currentPlayer.play();
+        currentPlayer = currentPlayer.equals(tiger) ? goat : tiger;
+    }
+
+    public boolean isTurn(UUID userID) {
+        Player player = player(userID);
+        return currentPlayer.equals(player);
+    }
+
+    private Player player(UUID userID) {
+        if (tiger.check(userID)) return tiger;
+        if (goat.check(userID)) return goat;
+        return null;
     }
 }
