@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Square {
 
     private ArrayList<Direction> directions;
-    private Team occupant;
+    private String occupant = "_";
 
     public Square() {
         directions = new ArrayList<>();
@@ -29,13 +29,11 @@ public class Square {
         System.out.println();
     }
 
-    public Team getOccupant() {
+    public String getOccupant() {
         return occupant;
     }
 
-    public String getEncodedOccupant() {
-        if(occupant == null) return "_";
-        if(occupant == Team.GOAT) return "G";
-        return "T";
+    public void setOccupant(String occupant) {
+        this.occupant = occupant;
     }
 }

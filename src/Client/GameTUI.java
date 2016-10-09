@@ -74,9 +74,10 @@ public class GameTUI {
         System.out.println("You are playing for the " + team);
         System.out.println("Make your move");
         System.out.println(game.getBoard(userID));
+        String input = scanner.nextLine();
 
-        // get input
+        game.makePlay(userID);
 
-//        game.makePlay(userID);
     }
+
 }

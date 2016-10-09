@@ -23,6 +23,7 @@ public class Board {
     private void createBoard() {
         addDirectDirections();
         addDiagonalDirections();
+        positionTigers();
     }
 
     private void addDirectDirections() {
@@ -70,6 +71,13 @@ public class Board {
         square.addDirection(Direction.SOUTHWEST);
     }
 
+    private void positionTigers() {
+        matrix[0][4].setOccupant("1");
+        matrix[4][4].setOccupant("2");
+        matrix[4][0].setOccupant("3");
+        matrix[0][0].setOccupant("4");
+    }
+
     public void debugBoard() {
         for (int x = 0; x < SIZE; x++) {
             for (int y = 0; y < SIZE; y++) {
@@ -82,9 +90,9 @@ public class Board {
 
     public String getEncodedBoard() {
         String encodedBoard = "";
-        for (int x = 0; x < SIZE; x++) {
-            for (int y = SIZE - 1; y >= 0; y--) {
-                encodedBoard += matrix[x][y].getEncodedOccupant() + " ";
+        for (int y = SIZE - 1; y >= 0; y--) {
+            for (int x = 0; x < SIZE; x++) {
+                encodedBoard += matrix[x][y].getOccupant() + " ";
             }
             encodedBoard += "\n";
         }
