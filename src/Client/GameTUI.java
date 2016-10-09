@@ -22,6 +22,7 @@ public class GameTUI {
 
     public void startGame() throws RemoteException, InterruptedException {
         registerUser();
+        findGame();
         runMainLoop();
     }
 
@@ -33,7 +34,6 @@ public class GameTUI {
 
     private void runMainLoop() throws RemoteException, InterruptedException {
         boolean shouldRun = true;
-        findGame();
         while (shouldRun) {
             waitForTurn();
             makePlay();
@@ -41,9 +41,10 @@ public class GameTUI {
     }
 
     private void findGame() throws RemoteException, InterruptedException {
-        MatchStatus currentStatus = game.hasMatch(userID);
+        MatchStatus currentStatus;
         System.out.print("Finding your match");
         while (true) {
+            currentStatus = game.hasMatch(userID);
             switch (currentStatus) {
                 case TIGER:
                     team = Team.TIGER;
@@ -58,7 +59,6 @@ public class GameTUI {
                 case TIMEOUT:
                     break;
             }
-            currentStatus = game.hasMatch(userID);
             System.out.print(".");
             Thread.sleep(1000);
         }

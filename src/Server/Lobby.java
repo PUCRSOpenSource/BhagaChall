@@ -56,7 +56,8 @@ public class Lobby {
 
     public void makePlay(UUID userID) {
         Match match = findMatch(userID);
-        assert match != null;
-        match.play();
+        if (match != null) {
+            match.play();
+        }
     }
 }
