@@ -101,7 +101,7 @@ public class Board {
     }
 
     public boolean hasGoatLeft() {
-        return currentGoat <= 'B';
+        return currentGoat <= 'T';
     }
 
     public boolean isOccupied(int x, int y) {
