@@ -1,5 +1,6 @@
 package Server;
 
+import Shared.Direction;
 import Shared.MatchStatus;
 
 import java.util.UUID;
@@ -38,11 +39,6 @@ public class Match {
         return tiger.check(userID) || goat.check(userID);
     }
 
-    public void play() {
-        currentPlayer.play();
-        currentPlayer = currentPlayer.equals(tiger) ? goat : tiger;
-    }
-
     public boolean isTurn(UUID userID) {
         Player player = player(userID);
         return currentPlayer.equals(player);
@@ -66,6 +62,7 @@ public class Match {
         if (!isGoat(userID)) return false;
         if (board.isOccupied(x, y)) return false;
         board.putGoat(x, y);
+        currentPlayer = tiger;
         return true;
     }
 
@@ -77,4 +74,22 @@ public class Match {
         }
         return false;
     }
+
+    private boolean isTiger(UUID userID) {
+        Player player = player(userID);
+        if (player != null) {
+            return player.equals(tiger);
+        }
+        return false;
+    }
+
+    public boolean moveTiger(UUID userID, int tiger, Direction direction) {
+        if (!isTiger(userID)) return false;
+        boolean success = board.moveTiger(tiger, direction);
+        if (success) {
+            currentPlayer = goat;
+        }
+        return success;
+    }
+
 }

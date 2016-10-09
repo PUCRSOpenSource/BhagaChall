@@ -113,4 +113,64 @@ public class Board {
         matrix[x][y].setOccupant(String.valueOf(currentGoat));
         currentGoat++;
     }
+
+    public boolean moveTiger(int tiger, Direction direction) {
+        int[] position = find("" + tiger);
+        if (position[0] == -1) return false;
+        Square nextSquare = squareAt(position[0], position[1], direction, 1);
+        if (!isOccupied(nextSquare)) {
+            matrix[position[0]][position[1]].setOccupant("_");
+            nextSquare.setOccupant("" + tiger);
+            return true;
+        }
+        Square nextNextSquare = squareAt(position[0], position[1], direction, 2);
+        if (isOccupied(nextNextSquare)) {
+            return false;
+        }
+        matrix[position[0]][position[1]].setOccupant("_");
+        nextNextSquare.setOccupant("" + tiger);
+        nextSquare.setOccupant("_");
+        return true;
+    }
+
+    private boolean isOccupied(Square square) {
+        return !square.getOccupant().equals("_");
+    }
+
+    private int[] find(String id) {
+        int[] position = new int[2];
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                if (matrix[x][y].getOccupant().equals(id)) {
+                    position[0] = x;
+                    position[1] = y;
+                    return position;
+                }
+            }
+        }
+        position[0] = -1;
+        position[1] = -1;
+        return position;
+    }
+
+    private Square squareAt(int originX, int originY, Direction direction, int hops) {
+        switch (direction) {
+            case NORTH:
+                return matrix[originX][originY + hops];
+            case NORTHEAST:
+                return matrix[originX + hops][originY + hops];
+            case EAST:
+                return matrix[originX + hops][originY];
+            case SOUTHEAST:
+                return matrix[originX + hops][originY - hops];
+            case SOUTH:
+                return matrix[originX][originY - hops];
+            case SOUTHWEST:
+                return matrix[originX - hops][originY - hops];
+            case WEST:
+                return matrix[originX - hops][originY];
+            default:
+                return matrix[originX - hops][originY + hops];
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package Server;
 
+import Shared.Direction;
 import Shared.MatchStatus;
 
 import java.util.ArrayList;
@@ -54,13 +55,6 @@ public class Lobby {
         return null;
     }
 
-    public void makePlay(UUID userID) {
-        Match match = findMatch(userID);
-        if (match != null) {
-            match.play();
-        }
-    }
-
     public String getBoard(UUID userID) {
         Match match = findMatch(userID);
         if (match == null) return "";
@@ -77,5 +71,11 @@ public class Lobby {
         Match match = findMatch(userID);
         if (match == null) return false;
         return match.putGoat(userID, x, y);
+    }
+
+    public boolean moveTiger(UUID userID, int tiger, Direction direction) {
+        Match match = findMatch(userID);
+        if (match == null) return false;
+        return match.moveTiger(userID, tiger, direction);
     }
 }

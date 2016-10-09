@@ -1,5 +1,6 @@
 package Server;
 
+import Shared.Direction;
 import Shared.GameInterface;
 import Shared.MatchStatus;
 
@@ -31,11 +32,6 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     }
 
     @Override
-    public void makePlay(UUID userID) throws RemoteException {
-        lobby.makePlay(userID);
-    }
-
-    @Override
     public String getBoard(UUID userID) throws RemoteException {
         return lobby.getBoard(userID);
     }
@@ -46,8 +42,13 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     }
 
     @Override
-    public boolean putGoat(UUID userID, int x, int y) {
+    public boolean putGoat(UUID userID, int x, int y)  throws RemoteException  {
         return lobby.putGoat(userID, x, y);
+    }
+
+    @Override
+    public boolean moveTiger(UUID userID, int tiger, Direction direction) throws RemoteException {
+        return lobby.moveTiger(userID, tiger, direction);
     }
 }
 
