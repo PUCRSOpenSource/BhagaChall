@@ -2,6 +2,8 @@ package Server;
 
 import Shared.Direction;
 
+import java.util.ArrayList;
+
 public class Board {
 
     private final int SIZE = 5;
@@ -209,5 +211,36 @@ public class Board {
 
     public int getNumberOfGoatsEaten() {
         return numberOfGoatsEaten;
+    }
+
+    public boolean tigersCanMove() {
+        int[] tiger1 = find("1");
+        int[] tiger2 = find("2");
+        int[] tiger3 = find("3");
+        int[] tiger4 = find("4");
+        return tigerCanMove(tiger1[0], tiger1[1]) &&
+                tigerCanMove(tiger2[0], tiger2[1]) &&
+                tigerCanMove(tiger3[0], tiger3[1]) &&
+                tigerCanMove(tiger4[0], tiger4[1]);
+
+    }
+
+    private boolean tigerCanMove(int x, int y) {
+        Square tigerSquare = matrix[x][y];
+        ArrayList<Direction> directions = tigerSquare.getDirections();
+
+        String[] goats = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"};
+
+        for (Direction direction : directions) {
+            if (squareAt(x, y, direction, 1).getOccupant().equals("_")) return true;
+
+            for (String goat : goats) {
+                if (squareAt(x, y, direction, 1).getOccupant().equals(goat) &&
+                        squareAt(x, y, direction, 2).getOccupant().equals("_")) return true;
+            }
+
+        }
+        return false;
     }
 }

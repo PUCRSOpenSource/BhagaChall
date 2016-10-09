@@ -63,9 +63,8 @@ public class Match {
     }
 
     private boolean goatWins() {
-        return false;
+        return !board.tigersCanMove();
     }
-
 
     private Player player(UUID userID) {
         if (tiger.check(userID)) return tiger;
