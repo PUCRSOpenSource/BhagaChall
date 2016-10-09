@@ -66,4 +66,16 @@ public class Lobby {
         if (match == null) return "";
         return match.getEncodedBoard();
     }
+
+    public boolean hasGoatLeft(UUID userID) {
+        Match match = findMatch(userID);
+        if (match == null) return false;
+        return match.hasGoatLeft();
+    }
+
+    public boolean putGoat(UUID userID, int x, int y) {
+        Match match = findMatch(userID);
+        if (match == null) return false;
+        return match.putGoat(userID, x, y);
+    }
 }

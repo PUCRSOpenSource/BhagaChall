@@ -30,7 +30,7 @@ public class Match {
             goat = player;
         } else {
             tiger = player;
-            currentPlayer = tiger;
+            currentPlayer = goat;
         }
     }
 
@@ -56,5 +56,25 @@ public class Match {
 
     public String getEncodedBoard() {
         return board.getEncodedBoard();
+    }
+
+    public boolean hasGoatLeft() {
+        return board.hasGoatLeft();
+    }
+
+    public boolean putGoat(UUID userID, int x, int y) {
+        if (!isGoat(userID)) return false;
+        if (board.isOccupied(x, y)) return false;
+        board.putGoat(x, y);
+        return true;
+    }
+
+
+    private boolean isGoat(UUID userID) {
+        Player player = player(userID);
+        if (player != null) {
+            return player.equals(goat);
+        }
+        return false;
     }
 }

@@ -71,12 +71,37 @@ public class GameTUI {
     }
 
     private void makePlay() throws RemoteException {
+        System.out.println("");
         System.out.println("You are playing for the " + team);
         System.out.println("Make your move");
         System.out.println(game.getBoard(userID));
-        String input = scanner.nextLine();
+        if (team == Team.GOAT) {
+            makeGoatPlay();
+        } else {
+            moveTiger();
+        }
+    }
 
-        game.makePlay(userID);
+    private void makeGoatPlay() throws RemoteException {
+        if (game.hasGoatLeft(userID)) {
+            putGoat();
+        }
+        moveGoat();
+    }
+
+    private void putGoat() throws RemoteException {
+        System.out.println("Input the coordinates you want to put your goat using format xy");
+        int input = scanner.nextInt();
+        int x = input / 10;
+        int y = input % 10;
+        game.putGoat(userID, x, y);
+    }
+
+    private void moveGoat() {
+
+    }
+
+    private void moveTiger() {
 
     }
 

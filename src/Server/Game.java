@@ -39,5 +39,15 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     public String getBoard(UUID userID) throws RemoteException {
         return lobby.getBoard(userID);
     }
+
+    @Override
+    public boolean hasGoatLeft(UUID userID) throws RemoteException {
+        return lobby.hasGoatLeft(userID);
+    }
+
+    @Override
+    public boolean putGoat(UUID userID, int x, int y) {
+        return lobby.putGoat(userID, x, y);
+    }
 }
 

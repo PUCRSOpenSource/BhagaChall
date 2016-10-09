@@ -6,6 +6,7 @@ public class Board {
 
     private final int SIZE = 5;
     Square[][] matrix = new Square[5][5];
+    char currentGoat = 'A';
 
     public Board() {
         initializeBoard();
@@ -97,5 +98,19 @@ public class Board {
             encodedBoard += "\n";
         }
         return encodedBoard;
+    }
+
+    public boolean hasGoatLeft() {
+        return currentGoat <= 'T';
+    }
+
+    public boolean isOccupied(int x, int y) {
+        if (!insideBoard(x, y)) return true;
+        return !matrix[x][y].getOccupant().equals("_");
+    }
+
+    public void putGoat(int x, int y) {
+        matrix[x][y].setOccupant(String.valueOf(currentGoat));
+        currentGoat++;
     }
 }

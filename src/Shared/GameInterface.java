@@ -10,4 +10,6 @@ public interface GameInterface extends Remote {
     boolean isMyTurn(UUID userID) throws RemoteException;
     void makePlay(UUID userID) throws  RemoteException;
     String getBoard(UUID userID) throws  RemoteException;
+    boolean hasGoatLeft(UUID userID) throws  RemoteException;
+    boolean putGoat(UUID userID, int x, int y) throws  RemoteException;
 }
