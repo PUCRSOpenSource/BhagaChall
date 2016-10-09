@@ -117,17 +117,29 @@ public class Board {
     public boolean moveTiger(int tiger, Direction direction) {
         int[] position = find("" + tiger);
         if (position[0] == -1) return false;
-        Square nextSquare = squareAt(position[0], position[1], direction, 1);
+        int x = position[0];
+        int y = position[1];
+        if (!matrix[x][y].getDirections().contains(direction)) {
+            return false;
+        }
+        Square nextSquare = squareAt(x, y, direction, 1);
         if (!isOccupied(nextSquare)) {
-            matrix[position[0]][position[1]].setOccupant("_");
+            matrix[x][y].setOccupant("_");
             nextSquare.setOccupant("" + tiger);
             return true;
         }
-        Square nextNextSquare = squareAt(position[0], position[1], direction, 2);
+
+        Square nextNextSquare = squareAt(x, y, direction, 2);
         if (isOccupied(nextNextSquare)) {
             return false;
         }
-        matrix[position[0]][position[1]].setOccupant("_");
+        if (nextNextSquare.getOccupant().equals("1") ||
+                nextNextSquare.getOccupant().equals("2") ||
+                nextNextSquare.getOccupant().equals("3") ||
+                nextNextSquare.getOccupant().equals("4")) {
+            return false;
+        }
+        matrix[x][y].setOccupant("_");
         nextNextSquare.setOccupant("" + tiger);
         nextSquare.setOccupant("_");
         return true;
