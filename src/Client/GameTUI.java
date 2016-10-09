@@ -1,9 +1,6 @@
 package Client;
 
-import Shared.Direction;
-import Shared.GameInterface;
-import Shared.MatchStatus;
-import Shared.Team;
+import Shared.*;
 
 import java.rmi.RemoteException;
 import java.util.Scanner;
@@ -67,7 +64,9 @@ public class GameTUI {
 
     private void waitForTurn() throws RemoteException, InterruptedException {
         System.out.println("Enemy player is making their move.");
-        while (!game.isMyTurn(userID)) {
+        TurnStatus status = TurnStatus.FALSE;
+        while (status != TurnStatus.TRUE) {
+            status = game.isMyTurn(userID);
             Thread.sleep(1000);
         }
     }

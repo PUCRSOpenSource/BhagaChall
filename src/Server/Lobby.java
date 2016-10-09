@@ -2,6 +2,7 @@ package Server;
 
 import Shared.Direction;
 import Shared.MatchStatus;
+import Shared.TurnStatus;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -41,9 +42,10 @@ public class Lobby {
         return MatchStatus.NOT_FOUND;
     }
 
-    public boolean isTurn(UUID userID) {
+    public TurnStatus isTurn(UUID userID) {
         Match match = findMatch(userID);
-        return match != null && match.isTurn(userID);
+        if (match == null) return TurnStatus.ERROR;
+        return match.isTurn(userID);
     }
 
     private Match findMatch(UUID userID) {

@@ -2,6 +2,7 @@ package Server;
 
 import Shared.Direction;
 import Shared.MatchStatus;
+import Shared.TurnStatus;
 
 import java.util.UUID;
 
@@ -39,9 +40,12 @@ public class Match {
         return tiger.check(userID) || goat.check(userID);
     }
 
-    public boolean isTurn(UUID userID) {
+    public TurnStatus isTurn(UUID userID) {
         Player player = player(userID);
-        return currentPlayer.equals(player);
+        if (currentPlayer.equals(player)) {
+            return TurnStatus.TRUE;
+        }
+        return TurnStatus.FALSE;
     }
 
     private Player player(UUID userID) {

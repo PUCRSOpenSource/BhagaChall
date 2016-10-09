@@ -3,6 +3,7 @@ package Server;
 import Shared.Direction;
 import Shared.GameInterface;
 import Shared.MatchStatus;
+import Shared.TurnStatus;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -27,7 +28,7 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     }
 
     @Override
-    public boolean isMyTurn(UUID userID) throws RemoteException {
+    public TurnStatus isMyTurn(UUID userID) throws RemoteException {
         return lobby.isTurn(userID);
     }
 

@@ -9,7 +9,7 @@ public interface GameInterface extends Remote {
 
     MatchStatus hasMatch(UUID userID) throws RemoteException;
 
-    boolean isMyTurn(UUID userID) throws RemoteException;
+    TurnStatus isMyTurn(UUID userID) throws RemoteException;
 
     String getBoard(UUID userID) throws RemoteException;
 
