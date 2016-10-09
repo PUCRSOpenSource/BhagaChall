@@ -42,14 +42,30 @@ public class Match {
 
     public TurnStatus isTurn(UUID userID) {
         Player player = player(userID);
+        if(player == null) return TurnStatus.ERROR;
 
-        //TODO: Check if game ended.
+        if (tigerWins()) {
+            return player.equals(tiger) ? TurnStatus.WINNER : TurnStatus.LOSER;
+        }
+
+        if (goatWins()) {
+            return player.equals(goat) ? TurnStatus.WINNER : TurnStatus.LOSER;
+        }
 
         if (currentPlayer.equals(player)) {
             return TurnStatus.TRUE;
         }
         return TurnStatus.FALSE;
     }
+
+    private boolean tigerWins() {
+        return board.getNumberOfGoatsEaten() >= 5;
+    }
+
+    private boolean goatWins() {
+        return false;
+    }
+
 
     private Player player(UUID userID) {
         if (tiger.check(userID)) return tiger;

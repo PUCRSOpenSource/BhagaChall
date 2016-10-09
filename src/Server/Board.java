@@ -6,7 +6,8 @@ public class Board {
 
     private final int SIZE = 5;
     Square[][] matrix = new Square[5][5];
-    char currentGoat = 'A';
+    private char currentGoat = 'A';
+    private int numberOfGoatsEaten = 0;
 
     public Board() {
         initializeBoard();
@@ -143,6 +144,7 @@ public class Board {
         matrix[x][y].setOccupant("_");
         nextNextSquare.setOccupant("" + tiger);
         nextSquare.setOccupant("_");
+        numberOfGoatsEaten++;
         return true;
     }
 
@@ -203,5 +205,9 @@ public class Board {
         }
 
         return false;
+    }
+
+    public int getNumberOfGoatsEaten() {
+        return numberOfGoatsEaten;
     }
 }
