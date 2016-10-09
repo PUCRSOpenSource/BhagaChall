@@ -34,5 +34,10 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     public void makePlay(UUID userID) throws RemoteException {
         lobby.makePlay(userID);
     }
+
+    @Override
+    public String getBoard(UUID userID) throws RemoteException {
+        return lobby.getBoard(userID);
+    }
 }
 

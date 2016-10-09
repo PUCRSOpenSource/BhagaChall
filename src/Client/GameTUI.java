@@ -71,6 +71,12 @@ public class GameTUI {
     }
 
     private void makePlay() throws RemoteException {
-        game.makePlay(userID);
+        System.out.println("You are playing for the " + team);
+        System.out.println("Make your move");
+        System.out.println(game.getBoard(userID));
+
+        // get input
+
+//        game.makePlay(userID);
     }
 }

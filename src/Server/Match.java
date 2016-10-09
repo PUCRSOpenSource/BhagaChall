@@ -9,6 +9,8 @@ public class Match {
     Player goat;
     Player currentPlayer;
 
+    Board board = new Board();
+
     public boolean isOpen() {
         return tiger == null || goat == null;
     }
@@ -50,5 +52,9 @@ public class Match {
         if (tiger.check(userID)) return tiger;
         if (goat.check(userID)) return goat;
         return null;
+    }
+
+    public String getEncodedBoard() {
+        return board.getEncodedBoard();
     }
 }

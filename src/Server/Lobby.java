@@ -60,4 +60,10 @@ public class Lobby {
             match.play();
         }
     }
+
+    public String getBoard(UUID userID) {
+        Match match = findMatch(userID);
+        if (match == null) return "";
+        return match.getEncodedBoard();
+    }
 }

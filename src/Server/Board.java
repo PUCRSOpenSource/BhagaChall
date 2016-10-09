@@ -2,8 +2,6 @@ package Server;
 
 import Shared.Direction;
 
-import java.util.ArrayList;
-
 public class Board {
 
     private final int SIZE = 5;
@@ -25,16 +23,6 @@ public class Board {
     private void createBoard() {
         addDirectDirections();
         addDiagonalDirections();
-    }
-
-    public void printBoard() {
-        for (int x = 0; x < SIZE; x++) {
-            for (int y = 0; y < SIZE; y++) {
-                System.out.println("When you are on position x = " + x + " y = " + y);
-                System.out.println("You can move the following directions:");
-                matrix[x][y].printDirections();
-            }
-        }
     }
 
     private void addDirectDirections() {
@@ -80,5 +68,26 @@ public class Board {
         square.addDirection(Direction.NORTHWEST);
         square.addDirection(Direction.SOUTHEAST);
         square.addDirection(Direction.SOUTHWEST);
+    }
+
+    public void debugBoard() {
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = 0; y < SIZE; y++) {
+                System.out.println("When you are on position x = " + x + " y = " + y);
+                System.out.println("You can move the following directions:");
+                matrix[x][y].printDirections();
+            }
+        }
+    }
+
+    public String getEncodedBoard() {
+        String encodedBoard = "";
+        for (int x = 0; x < SIZE; x++) {
+            for (int y = SIZE - 1; y >= 0; y--) {
+                encodedBoard += matrix[x][y].getEncodedOccupant() + " ";
+            }
+            encodedBoard += "\n";
+        }
+        return encodedBoard;
     }
 }
