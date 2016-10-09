@@ -50,5 +50,10 @@ public class Game extends UnicastRemoteObject implements GameInterface {
     public boolean moveTiger(UUID userID, int tiger, Direction direction) throws RemoteException {
         return lobby.moveTiger(userID, tiger, direction);
     }
+
+    @Override
+    public boolean moveGoat(UUID userID, String goat, Direction direction) throws RemoteException {
+        return lobby.moveGoat(userID, goat, direction);
+    }
 }
 

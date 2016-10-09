@@ -101,7 +101,7 @@ public class Board {
     }
 
     public boolean hasGoatLeft() {
-        return currentGoat <= 'T';
+        return currentGoat <= 'B';
     }
 
     public boolean isOccupied(int x, int y) {
@@ -129,14 +129,15 @@ public class Board {
             return true;
         }
 
-        Square nextNextSquare = squareAt(x, y, direction, 2);
-        if (isOccupied(nextNextSquare)) {
+        if (nextSquare.getOccupant().equals("1") ||
+                nextSquare.getOccupant().equals("2") ||
+                nextSquare.getOccupant().equals("3") ||
+                nextSquare.getOccupant().equals("4")) {
             return false;
         }
-        if (nextNextSquare.getOccupant().equals("1") ||
-                nextNextSquare.getOccupant().equals("2") ||
-                nextNextSquare.getOccupant().equals("3") ||
-                nextNextSquare.getOccupant().equals("4")) {
+
+        Square nextNextSquare = squareAt(x, y, direction, 2);
+        if (isOccupied(nextNextSquare)) {
             return false;
         }
         matrix[x][y].setOccupant("_");
@@ -184,5 +185,23 @@ public class Board {
             default:
                 return matrix[originX - hops][originY + hops];
         }
+    }
+
+    public boolean moveGoat(String goat, Direction direction) {
+        int[] position = find("" + goat);
+        if (position[0] == -1) return false;
+        int x = position[0];
+        int y = position[1];
+        if (!matrix[x][y].getDirections().contains(direction)) {
+            return false;
+        }
+        Square nextSquare = squareAt(x, y, direction, 1);
+        if (!isOccupied(nextSquare)) {
+            matrix[x][y].setOccupant("_");
+            nextSquare.setOccupant("" + goat);
+            return true;
+        }
+
+        return false;
     }
 }

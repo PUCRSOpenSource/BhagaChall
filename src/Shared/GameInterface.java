@@ -18,4 +18,6 @@ public interface GameInterface extends Remote {
     boolean putGoat(UUID userID, int x, int y) throws RemoteException;
 
     boolean moveTiger(UUID userID, int tiger, Direction direction) throws RemoteException;
+
+    boolean moveGoat(UUID userID, String goat, Direction direction) throws RemoteException;
 }

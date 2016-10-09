@@ -87,8 +87,9 @@ public class GameTUI {
     private void makeGoatPlay() throws RemoteException {
         if (game.hasGoatLeft(userID)) {
             putGoat();
+        } else {
+            moveGoat();
         }
-        moveGoat();
     }
 
     private void putGoat() throws RemoteException {
@@ -96,6 +97,7 @@ public class GameTUI {
         while (!success) {
             System.out.println("Input the coordinates you want to put your goat using format xy");
             int input = scanner.nextInt();
+            scanner.nextLine();
             int x = input / 10;
             int y = input % 10;
             success = game.putGoat(userID, x, y);
@@ -105,8 +107,24 @@ public class GameTUI {
         }
     }
 
-    private void moveGoat() {
+    private void moveGoat() throws RemoteException {
+        boolean success = false;
+        while (!success) {
+            System.out.println("Input the direction you want to move your goat using format goatdirection");
+            System.out.println("Directions are: ");
+            System.out.println("0 = EAST; 1 = SOUTHEAST; 2 = SOUTH; 3 = SOUTHWEST; 4 = WEST; 5 = NORTHWEST; 6 = NORTH; 7 = NORTHEAST");
 
+            String input = scanner.nextLine();
+            char[] values = input.toCharArray();
+
+            Direction direction = direction(Character.getNumericValue(values[1]));
+
+            success = game.moveGoat(userID, String.valueOf(values[0]), direction);
+
+            if (!success) {
+                System.out.println("input invalid");
+            }
+        }
     }
 
     private void moveTiger() throws RemoteException {
@@ -117,6 +135,7 @@ public class GameTUI {
             System.out.println("0 = EAST; 1 = SOUTHEAST; 2 = SOUTH; 3 = SOUTHWEST; 4 = WEST; 5 = NORTHWEST; 6 = NORTH; 7 = NORTHEAST");
 
             int input = scanner.nextInt();
+            scanner.nextLine();
 
             int tiger = input / 10;
             Direction direction = direction(input % 10);

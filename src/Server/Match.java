@@ -92,4 +92,12 @@ public class Match {
         return success;
     }
 
+    public boolean moveGoat(UUID userID, String goat, Direction direction) {
+        if (!isGoat(userID)) return false;
+        boolean success = board.moveGoat(goat, direction);
+        if (success) {
+            currentPlayer = tiger;
+        }
+        return success;
+    }
 }

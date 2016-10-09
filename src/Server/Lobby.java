@@ -78,4 +78,10 @@ public class Lobby {
         if (match == null) return false;
         return match.moveTiger(userID, tiger, direction);
     }
+
+    public boolean moveGoat(UUID userID, String goat, Direction direction) {
+        Match match = findMatch(userID);
+        if (match == null) return false;
+        return match.moveGoat(userID, goat, direction);
+    }
 }
