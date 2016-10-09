@@ -42,6 +42,9 @@ public class Match {
 
     public TurnStatus isTurn(UUID userID) {
         Player player = player(userID);
+
+        //TODO: Check if game ended.
+
         if (currentPlayer.equals(player)) {
             return TurnStatus.TRUE;
         }

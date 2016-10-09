@@ -31,9 +31,18 @@ public class GameTUI {
     }
 
     private void runMainLoop() throws RemoteException, InterruptedException {
-        boolean shouldRun = true;
-        while (shouldRun) {
-            waitForTurn();
+        while (true) {
+            TurnStatus status = waitForTurn();
+
+            if (status == TurnStatus.WINNER) {
+                System.out.println("You win");
+                return;
+            }
+
+            if (status == TurnStatus.LOSER) {
+                System.out.println("You lose");
+                return;
+            }
             makePlay();
         }
     }
@@ -62,13 +71,24 @@ public class GameTUI {
         }
     }
 
-    private void waitForTurn() throws RemoteException, InterruptedException {
+    private TurnStatus waitForTurn() throws RemoteException, InterruptedException {
+        System.out.println();
         System.out.println("Enemy player is making their move.");
         TurnStatus status = TurnStatus.FALSE;
         while (status != TurnStatus.TRUE) {
+            if (status == TurnStatus.WINNER) {
+                return status;
+            }
+            if (status == TurnStatus.LOSER) {
+                return status;
+            }
+            if (status == TurnStatus.ERROR) {
+                return status;
+            }
             status = game.isMyTurn(userID);
             Thread.sleep(1000);
         }
+        return status;
     }
 
     private void makePlay() throws RemoteException {
