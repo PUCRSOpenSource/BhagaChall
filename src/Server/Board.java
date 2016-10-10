@@ -218,9 +218,9 @@ public class Board {
         int[] tiger2 = find("2");
         int[] tiger3 = find("3");
         int[] tiger4 = find("4");
-        return tigerCanMove(tiger1[0], tiger1[1]) &&
-                tigerCanMove(tiger2[0], tiger2[1]) &&
-                tigerCanMove(tiger3[0], tiger3[1]) &&
+        return tigerCanMove(tiger1[0], tiger1[1]) ||
+                tigerCanMove(tiger2[0], tiger2[1]) ||
+                tigerCanMove(tiger3[0], tiger3[1]) ||
                 tigerCanMove(tiger4[0], tiger4[1]);
 
     }
