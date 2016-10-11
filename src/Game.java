@@ -1,10 +1,3 @@
-package Server;
-
-import Shared.Direction;
-import Shared.GameInterface;
-import Shared.MatchStatus;
-import Shared.TurnStatus;
-
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.UUID;

@@ -1,5 +1,3 @@
-package Server;
-
 import java.util.UUID;
 
 public class Player {

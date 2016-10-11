@@ -1,7 +1,3 @@
-package Server;
-
-import Shared.Direction;
-
 import java.util.ArrayList;
 
 public class Board {
@@ -126,6 +122,7 @@ public class Board {
             return false;
         }
         Square nextSquare = squareAt(x, y, direction, 1);
+        if (nextSquare == null) return false;
         if (!isOccupied(nextSquare)) {
             matrix[x][y].setOccupant("_");
             nextSquare.setOccupant("" + tiger);
@@ -138,8 +135,8 @@ public class Board {
                 nextSquare.getOccupant().equals("4")) {
             return false;
         }
-
         Square nextNextSquare = squareAt(x, y, direction, 2);
+        if (nextNextSquare == null) return false;
         if (isOccupied(nextNextSquare)) {
             return false;
         }
@@ -171,23 +168,27 @@ public class Board {
     }
 
     private Square squareAt(int originX, int originY, Direction direction, int hops) {
-        switch (direction) {
-            case NORTH:
-                return matrix[originX][originY + hops];
-            case NORTHEAST:
-                return matrix[originX + hops][originY + hops];
-            case EAST:
-                return matrix[originX + hops][originY];
-            case SOUTHEAST:
-                return matrix[originX + hops][originY - hops];
-            case SOUTH:
-                return matrix[originX][originY - hops];
-            case SOUTHWEST:
-                return matrix[originX - hops][originY - hops];
-            case WEST:
-                return matrix[originX - hops][originY];
-            default:
-                return matrix[originX - hops][originY + hops];
+        try {
+            switch (direction) {
+                case NORTH:
+                    return matrix[originX][originY + hops];
+                case NORTHEAST:
+                    return matrix[originX + hops][originY + hops];
+                case EAST:
+                    return matrix[originX + hops][originY];
+                case SOUTHEAST:
+                    return matrix[originX + hops][originY - hops];
+                case SOUTH:
+                    return matrix[originX][originY - hops];
+                case SOUTHWEST:
+                    return matrix[originX - hops][originY - hops];
+                case WEST:
+                    return matrix[originX - hops][originY];
+                default:
+                    return matrix[originX - hops][originY + hops];
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return null;
         }
     }
 

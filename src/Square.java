@@ -1,8 +1,3 @@
-package Server;
-
-import Shared.Direction;
-import Shared.Team;
-
 import java.util.ArrayList;
 
 public class Square {

@@ -1,7 +1,3 @@
-package Client;
-
-import Shared.*;
-
 import java.rmi.RemoteException;
 import java.util.Scanner;
 import java.util.UUID;

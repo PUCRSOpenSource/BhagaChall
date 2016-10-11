@@ -1,9 +1,3 @@
-package Server;
-
-import Shared.Direction;
-import Shared.MatchStatus;
-import Shared.TurnStatus;
-
 import java.util.UUID;
 
 public class Match {
